@@ -1,0 +1,86 @@
+header {
+    background-color: #1c2117 !important;
+}
+body {
+    background-color: #ff9a0026;
+}
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+}
+.order-table {
+    box-shadow: none;
+    border: 1px solid #f2f2f2 !important;
+
+
+}
+.order-table th {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+}
+.order-table td {
+    font-size: 18px;
+    padding: 10px;
+    border-right: 1px solid #f2f2f2 !important;
+    color: #1c2117;
+
+
+}
+.order-table td:nth-child(3n) {
+    width: 400px;
+}
+.css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+    box-shadow: none !important;
+}
+.order-table tbody {
+    border: 1px solid #f2f2f2 !important;
+    
+}
+.order-table tbody .cancel-btn {
+    border: 1px solid #e64001;
+    color: #e64001;
+    padding: 10px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.order-table tbody .cancel-btn:hover {
+    background-color: #e64001;
+    color: #fff;
+    border-color: #e64001;
+}
+.order-table tbody td:last-child {
+    width: 100px;
+    text-align: center;
+}
+
+.place-order-button{
+background-color: #fd9d04 !important;
+padding: 10px !important;
+border-radius: 10px !important;
+color: #fff !important;
+font-size: 18px !important;
+width: 200px;
+font-weight: 600 !important;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center !important;
+}
+.title {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+}
+.bg-white {
+    background-color: #fff;
+    padding: 25px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}

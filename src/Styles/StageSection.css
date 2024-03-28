@@ -1,0 +1,10 @@
+.stage-container {
+  background-color: "red";
+  height: 20px;
+  width: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 50px auto;
+}
