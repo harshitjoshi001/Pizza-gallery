@@ -53,7 +53,7 @@ const Card = ({ order, handleNext }) => {
         <>
           <Typography style={CardStyle.Timer}>{getTime()}</Typography>
           <Button
-            onClick={() => handleNext(timer)}
+            onClick={() => handleNext(timer, order.stage)}
             style={CardStyle.nextButton}
           >
             Next
@@ -70,7 +70,7 @@ export default memo(Card);
 
 const CardStyle = {
   container: {
-    height: 150,
+    minHeight: 150,
     width: 200,
     borderRadius: 20,
     margin: 15,

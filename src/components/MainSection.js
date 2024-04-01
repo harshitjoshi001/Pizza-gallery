@@ -5,7 +5,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableFooter,
   TableHead,
   TableRow,
   Typography,
@@ -22,12 +21,14 @@ import { cancelOrder } from "../redux/slices/pizzaSlice";
 
 export const MainSection = () => {
   const orders = useSelector((state) => state.pizzaSlice.orders);
+  const pickedOrders = useSelector((state) => state.pizzaSlice.pickedOrders);
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
   const renderOrders = () => {
-    if (orders.length) {
-      return orders.map((order) => {
+    if (orders.length || pickedOrders.length) {
+      const OrdersList = [...orders, ...pickedOrders];
+      return OrdersList.map((order) => {
         return (
           <TableRow
             key={"name"}
@@ -73,7 +74,6 @@ export const MainSection = () => {
   };
 
   const formatTimer = (timer) => {
-    console.log(timer, "Asdlkhsfkjsdhfik");
     const minutes = Math.floor(timer / 60)
       .toString()
       .padStart(2, "0");
@@ -107,7 +107,6 @@ export const MainSection = () => {
             </TableRow>
           </TableHead>
           <TableBody>{renderOrders()}</TableBody>
-          
         </Table>
       </TableContainer>
       <PlaceOrderModal

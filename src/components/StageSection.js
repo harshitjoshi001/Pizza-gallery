@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeStage } from "../redux/slices/pizzaSlice";
+import { changeStage, setPickedOrders } from "../redux/slices/pizzaSlice";
 import { orderSteps } from "../utils/utils";
 import Card from "./Card";
 
@@ -9,9 +9,8 @@ export const StageSection = () => {
   const [placedOrders, setPlacedOrders] = useState([]);
   const [makingOrders, setMakingOrders] = useState([]);
   const [readyOrders, setReadyOrders] = useState([]);
-  const [pickedOrders, setPickedOrders] = useState([]);
-
   const orders = useSelector((state) => state.pizzaSlice.orders);
+  const pickedOrders = useSelector((state) => state.pizzaSlice.pickedOrders);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,25 +41,27 @@ export const StageSection = () => {
 
       setPlacedOrders(placed);
       setMakingOrders(making);
-      setPickedOrders(picked);
       setReadyOrders(ready);
     };
     categorizeItems();
   }, [orders]);
 
-  const handleNext = (orderId, timer) => {
+  const handleNext = (orderId, timer, orderStage) => {
     let Orders = JSON.parse(JSON.stringify(orders));
     const order = orders.find((Order) => Order.order_id === orderId);
-    debugger;
+
     const updatedOrder = {
       ...order,
       stage: orderSteps[orderSteps.indexOf(order.stage) + 1],
       totalTimeSpent: order.totalTimeSpent + timer,
       stageTimeSpent: Date.now(),
     };
-    debugger;
     const index = orders.findIndex((order) => order.order_id === orderId);
     Orders[index] = updatedOrder;
+    if (order.stage === "ready") {
+      Orders = Orders.filter((order) => order.order_id !== orderId);
+      dispatch(setPickedOrders(updatedOrder));
+    }
     dispatch(changeStage(Orders));
   };
 
@@ -72,7 +73,9 @@ export const StageSection = () => {
           return (
             <Card
               order={order}
-              handleNext={(timer) => handleNext(order.order_id, timer)}
+              handleNext={(timer, orderStage) =>
+                handleNext(order.order_id, timer, orderStage)
+              }
             />
           );
         })}
@@ -113,8 +116,9 @@ const stagingStyles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
     width: "100%",
+    overflow: "auto",
+    maxHeight: "550px",
   },
   stage: {
     textAlign: "center",

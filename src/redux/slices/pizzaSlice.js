@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   orders: [],
+  pickedOrders: [],
 };
 
 export const pizzaSLice = createSlice({
@@ -17,9 +18,13 @@ export const pizzaSLice = createSlice({
     changeStage: (state, action) => {
       state.orders = action.payload;
     },
+    setPickedOrders: (state, action) => {
+      state.pickedOrders = [...state.pickedOrders, action.payload];
+    },
   },
 });
 
-export const { placeOrder, cancelOrder, changeStage } = pizzaSLice.actions;
+export const { placeOrder, cancelOrder, changeStage, setPickedOrders } =
+  pizzaSLice.actions;
 
 export default pizzaSLice.reducer;
